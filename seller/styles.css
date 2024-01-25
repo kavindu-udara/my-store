@@ -1,0 +1,45 @@
+.upload-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.progress-bar-container {
+    width: 300px;
+    height: 20px;
+    border: 1px solid #ccc;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0;
+    height: 100%;
+    background-color: #4CAF50;
+    transition: width 0.3s ease-in-out;
+}
+
+.file-input {
+    display: none;
+}
+
+.upload-btn {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+#progress-container {
+    width: 300px;
+    margin: 20px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+#progress-bar {
+    width: 0;
+    height: 30px;
+    background-color: #4CAF50;
+    transition: width 0.3s ease-in-out;
+}
