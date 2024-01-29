@@ -24,6 +24,10 @@ class SetSession{
         }
     }
 
+    public function setSellerVerifySession($id){
+        $_SESSION['seller_verify'] = $id;
+    }
+
     public function setFillSellerInfoStatus(){
         $_SESSION['fill-info'] = '1';
     }   

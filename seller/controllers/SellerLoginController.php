@@ -32,4 +32,15 @@ class SellerLoginController{
             return false;
         }
     }
+
+    public function isSellerVerified($id){
+        $query = "SELECT verified FROM seller_details WHERE seller_id='$id';";
+        $query_result = $this -> conn -> query($query);
+        if($query_result->num_rows == 1){
+            $verified_no = $query_result -> fetch_assoc();
+            return $verified_no['verified'];
+        }else{
+            return false;
+        }
+    }
 }

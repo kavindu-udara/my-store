@@ -21,16 +21,25 @@
     <h1>seller home</h1>
 
     <?php
-    if ($_SESSION['fill-info'] == '0') {
-        ?>
-        <p>please fill the informatin to become a seller</p>
+    if (isset($_SESSION['seller_verify'])) {
+        if ($_SESSION['seller_verify'] == '0') {
+            ?>
+            <p>please fill the informatin to become a seller</p>
 
-        <a href="fillSellerInfo.php">fill info</a>
-        <?php
-    }else if($_SESSION['fill-info'] == '1'){
-        ?>
-        <p>your details is under review</p>
-        <?php
+            <a href="fillSellerInfo.php">fill info</a>
+            
+            <?php
+        } else if ($_SESSION['seller_verify'] == '1') {
+            ?>
+                <p>your details is under review</p>
+                <p>It's takes some days two check your submitted details and verify</p>
+                <a href="#">contact customer support</a>
+            <?php
+        } else if ($_SESSION['seller_verify'] == '2') {
+            ?>
+                    <p>your seller account is verified !</p>
+            <?php
+        }
     }
     ?>
 
