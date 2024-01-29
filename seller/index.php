@@ -27,7 +27,7 @@
             <p>please fill the informatin to become a seller</p>
 
             <a href="fillSellerInfo.php">fill info</a>
-            
+
             <?php
         } else if ($_SESSION['seller_verify'] == '1') {
             ?>
@@ -38,6 +38,8 @@
         } else if ($_SESSION['seller_verify'] == '2') {
             ?>
                     <p>your seller account is verified !</p>
+
+                    <h1>sell some products</h1>
             <?php
         }
     }
