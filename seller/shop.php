@@ -59,7 +59,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <button type="button" class="btn btn-primary">Edit details</button>
+                                <button type="button" onclick="changeShopDetails()" class="btn btn-primary">Edit details</button>
                             </div>
                         </div>
                     </div>

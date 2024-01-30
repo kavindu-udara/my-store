@@ -58,4 +58,14 @@ class UploadSellerPic{
             return false;
         }
     }
+
+    public function editSellerShop($id, $name, $email, $mobile, $picName){
+        $query = "UPDATE seller_has_shop SET shop_name='$name', shop_email='$email', shop_mobile='$mobile', shop_image='$picName' WHERE seller_id='$id' ;";
+        $result = $this->conn->query($query);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

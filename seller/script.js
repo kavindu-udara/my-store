@@ -100,7 +100,36 @@ function addShopPicView(){
 
         reader.readAsDataURL(file);
       } else {
-        preview.src = '';
+        shopImgEl.src = 'assets/images/shops/shop_default_imgs/default_shop_img.png';
       }
 
+}
+
+function changeShopDetails(){
+    let shopName = document.getElementById('input-shop-name');
+    let shopEmail = document.getElementById('input-shop-email');
+    let shopMobile = document.getElementById('input-shop-mobile');
+
+    let shopImg = document.getElementById('shop-img-select');
+
+    let formData = new FormData();
+
+    formData.append('shop-edit', 'true');
+    formData.append('shop-name', shopName.value);
+    formData.append('shop-email', shopEmail.value);
+    formData.append('shop-mobile', shopMobile.value);
+
+    formData.append('shop-image', shopImg.files[0]);
+
+    let r = new XMLHttpRequest();
+
+    r.onreadystatechange = function(){
+        if(r.status == 200 && r.readyState == 4){
+            var t = r.responseText;
+            alert(t);
+        }
+    }
+
+    r.open("POST", 'codes/pic_upload.php', true);
+    r.send(formData);
 }

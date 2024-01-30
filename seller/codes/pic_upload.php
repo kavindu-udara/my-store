@@ -78,6 +78,43 @@ if (isset($_POST['auth'])) {
         echo "unsupported file type";
         die('unsupported file type');
     }
-} else {
-    redirect('', 'seller/index.php');
+}
+
+
+if (isset($_POST['shop-edit'])) {
+    $seller_id = $_SESSION['auth_seller']['seller_id'];
+    $seller_fname = $_SESSION['auth_seller']['seller_fname'];
+    $seller_lname = $_SESSION['auth_seller']['seller_lname'];
+
+    $shop_name = validateInput($db->conn, $_POST['shop-name']);
+    $shop_email = validateInput($db->conn, $_POST['shop-email']);
+    $shop_mobile = validateInput($db->conn, $_POST['shop-mobile']);
+
+    $shop_picture = $_FILES['shop-image'];
+
+    if (empty($shop_name) || empty($shop_email) || empty($shop_mobile)) {
+
+        echo "empty input";
+
+    } else {
+
+        $check_file_extention = $upload_seller_picture->checkExtention($shop_picture['type']);
+
+        if ($check_file_extention) {
+            $new_img_extention_result = $upload_seller_picture->select_img_extention($shop_picture['type']);
+
+            $shop_pic_name = "../assets//images//shops//shop_images//" . $seller_id . "_" . $seller_fname . "_" . $seller_lname . "_" . "seller_shop_pic_" . uniqid() . $new_img_extention_result;
+            move_uploaded_file($shop_picture["tmp_name"], $shop_pic_name);
+
+            $edit_shop_details_result = $upload_seller_picture -> editSellerShop($seller_id, $shop_name, $shop_email, $shop_mobile, $shop_pic_name);
+            if($edit_shop_details_result){
+                echo "success";
+            }else{
+                echo "edit failed";
+            }
+
+        } else {
+            echo "wrong file extention";
+        }
+    }
 }
