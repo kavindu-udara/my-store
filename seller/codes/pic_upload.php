@@ -3,6 +3,8 @@ include('../../config/app.php');
 include_once('../controllers/UploadSellerPic.php');
 include_once('../controllers/setSession.php');
 
+$upload_seller_picture = new UploadSellerPic;
+
 if (isset($_POST['auth'])) {
 
     $seller_id = $_SESSION['auth_seller']['seller_id'];
@@ -13,6 +15,7 @@ if (isset($_POST['auth'])) {
     $NIC = validateInput($db->conn, $_POST['NIC']);
     $brd = validateInput($db->conn, $_POST['brd']);
     $adders = validateInput($db->conn, $_POST['adders']);
+
     $shopName = validateInput($db->conn, $_POST['shopName']);
     $shopEmail = validateInput($db->conn, $_POST['shopEmail']);
     $shopMobile = validateInput($db->conn, $_POST['shopMobile']);
@@ -24,8 +27,6 @@ if (isset($_POST['auth'])) {
     $imgs_file_types = array($ppic['type'], $NICfpic['type'], $NICbpic['type']);
 
     $new_img_extention = array();
-
-    $upload_seller_picture = new UploadSellerPic;
 
     for ($i = 0; $i < count($imgs_file_types); $i++) {
         $currentFileType = $imgs_file_types[$i];
@@ -52,11 +53,22 @@ if (isset($_POST['auth'])) {
         $upload_seller_details_result = $upload_seller_picture->uploadSellerDetails($fullName, $NIC, $brd, $seller_pic_name, $NIC_front_name, $NIC_back_name, $seller_id);
 
         if ($upload_seller_details_result) {
-            $setSession = new SetSession;
-            $setSession->setFillSellerInfoStatus();
+
+            $upload_seller_shop_details_result = $upload_seller_picture->uploadShopDetails($seller_id, $shopName, $shopEmail, $shopMobile);
+
+            if ($upload_seller_shop_details_result) {
+                $setSession = new SetSession;
+                $setSession->setFillSellerInfoStatus();
+                $_SESSION['message'] = "upload success";
+                echo "upload success";
+
+            } else {
+
+                $_SESSION['message'] = "upload failed";
+                echo "upload failed";
+            }
+
             // redirect('', 'seller/index.php');
-            $_SESSION['message'] = "upload success";
-            echo "upload success";
         } else {
             $_SESSION['message'] = "upload failed";
             echo "upload failed";

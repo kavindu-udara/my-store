@@ -38,7 +38,8 @@
         } else if ($_SESSION['seller_verify'] == '2') {
             ?>
                     <p>your seller account is verified !</p>
-
+                    <p>now time to make your shop</p>
+                    <a href="#">make shop</a>
                     <h1>sell some products</h1>
             <?php
         }

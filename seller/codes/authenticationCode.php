@@ -2,6 +2,7 @@
 
 include_once('controllers/SellerLoginController.php');
 include_once('controllers/SellerRegisterController.php');
+include_once('controllers/getSellersDetailsController.php');
 include_once('controllers/setSession.php');
 
 
@@ -78,4 +79,14 @@ if (isset($_POST['seller_logout_btn'])) {
     if ($check_logout) {
         redirect('logout success', 'seller/index.php');
     }
+}
+
+function getShopData(){
+    $seller_id =  $_SESSION['auth_seller']['seller_id'];
+    $shop = new GetSellersDetailsController;
+    $data = $shop -> getShopData($seller_id);
+    if($data != 'no data'){
+        return $data;
+    }
+    
 }

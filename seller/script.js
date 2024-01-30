@@ -15,7 +15,6 @@ function uploadFile() {
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {
-            // Handle the response from the server, if needed
             console.log(xhr.responseText);
         }
     };
@@ -25,7 +24,6 @@ function uploadFile() {
 }
 
 function uploadFileTest(){
-    // const fileinpt = document.getElementById('input-ppic');
     const pbar = document.getElementById('progress-bar-ppic');
 
     let fullName = document.getElementById('input-full-name');
@@ -40,7 +38,7 @@ function uploadFileTest(){
     let shopMobile = document.getElementById('input-shop-mobile');
 
 
-    const formData = new FormData();
+    let formData = new FormData();
     formData.append('auth', 'true');
 
     formData.append('fullName', fullName.value);
@@ -56,9 +54,7 @@ function uploadFileTest(){
     formData.append('NICfpic', NICfpic.files[0]);
     formData.append('NICbpic', NICbpic.files[0]);
 
-    const r = new XMLHttpRequest();
-
-    
+    let r = new XMLHttpRequest();
 
     r.onreadystatechange = function(){
         if(r.status == 200 && r.readyState == 4){
@@ -72,7 +68,7 @@ function uploadFileTest(){
                     }
                 });
 
-                // window.location.href = "index.php";
+                window.location.href = "index.php";
             }else if(t == "upload failed"){
                 // window.location.href = "fillSellerInfo.php";
                 location.reload();
@@ -87,4 +83,24 @@ function uploadFileTest(){
 
     r.open("POST", "codes/pic_upload.php", true);
     r.send(formData);
+}
+
+function addShopPicView(){
+    var shopImgEl = document.getElementById('shop-img-view');
+    var shopImg = document.getElementById('shop-img-select');
+    
+    var file = shopImg.files[0];
+
+    if (file) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            shopImgEl.src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+      } else {
+        preview.src = '';
+      }
+
 }

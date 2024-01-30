@@ -48,4 +48,14 @@ class UploadSellerPic{
             return false;
         }
     }
+
+    public function uploadShopDetails($id, $shopName, $shopEmail, $shopMobile){
+        $query = "INSERT INTO seller_has_shop(shop_name, shop_email, shop_mobile, seller_id) VALUES ('$shopName', '$shopEmail', '$shopMobile', '$id');";
+        $result = $this -> conn -> query($query);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
