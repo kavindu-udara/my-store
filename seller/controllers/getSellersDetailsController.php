@@ -16,4 +16,15 @@ class GetSellersDetailsController{
             return "no data";
         }
     }
+
+    public function getShopImg($id){
+        $query = "SELECT shop_image FROM seller_has_shop WHERE seller_id='$id' ;";
+        $result = $this -> conn -> query($query);
+        if($result->num_rows == 1){
+            $imgUrl = $result -> fetch_assoc();
+            return $imgUrl;
+        }else{
+            return "now rows";
+        }
+    }
 }

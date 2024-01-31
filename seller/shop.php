@@ -16,8 +16,10 @@
     include('codes/authenticationCode.php');
     include('includes/header.php');
     $shopData = getShopData();
+    $shopUrl = shopPicture();
 
     ?>
+
     <div class="row mt-3">
         <div class="col-3"></div>
         <div class="col-6">
@@ -25,43 +27,43 @@
                 <?php include('message.php'); ?>
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="text-center">Shop Details</h4>
+                        <h4 class="text-center">Your Shop Details</h4>
                     </div>
                     <div class="card-body">
+                        <form action="" method="POST">
 
-
-
-                        <div class="seller-info-form">
-
-                            <div class="text-center">
-                                <img src="assets/images/shops/shop_default_imgs/default_shop_img.png" id="shop-img-view" class="rounded img-thumbnail" alt="shop-img">
+                            <div class="text-center mb-3">
+                                <img src="assets/images/shops/shop_images/<?= basename($shopUrl['shop_image']); ?>" class="rounded img-thumbnail" alt="shop-default-img" id="shop-img-view">
                                 <br>
-                                <label class="btn btn-success mt-2" for="shop-img-select">add image</label>
-                                <input type="file" class="form-control d-none"  accept="image/*" id="shop-img-select" onchange="addShopPicView()">
+                                <input accept="image/*" type="file" class="d-none" onchange="addShopPicView();" id="shop-img-select">
+                                <label class="btn btn-success mt-3" for="shop-img-select">Select Image</label>
                             </div>
 
                             <div class="mb-3">
-                                <label for="input-shop-name">Shop Name</label>
+                                <label for="input-shop-name">Shop name :</label>
                                 <input type="text" name="fname" id="input-shop-name" class="form-control"
-                                    value='<?= $shopData['shop_name']; ?>' required >
-                            </div>
-
-
-                            <div class="mb-3">
-                                <label for="input-shop-email">Shop email :</label>
-                                <input type="email" name="nic" id="input-shop-email" class="form-control"
-                                    value='<?= $shopData['shop_email']; ?>' required >
-                            </div>
-                            <div class="mb-3">
-                                <label for="input-shop-mobile">Shop Mobile :</label>
-                                <input type="tel" name="input-shop-mobile" id="input-shop-mobile" class="form-control"
-                                    value='<?= $shopData['shop_mobile']; ?>' required >
+                                    value="<?= $shopData['shop_name']; ?>" required>
                             </div>
 
                             <div class="mb-3">
-                                <button type="button" onclick="changeShopDetails()" class="btn btn-primary">Edit details</button>
+                                <label for="input-shop-email">Email</label>
+                                <input type="email" name="email" id="input-shop-email" class="form-control"
+                                    value="<?= $shopData['shop_email']; ?>" required>
                             </div>
-                        </div>
+
+                            <div class="mb-3">
+                                <label for="input-shop-mobile">Mobile</label>
+                                <input type="text" name="mobile" id="input-shop-mobile" class="form-control"
+                                    value="<?= $shopData['shop_mobile']; ?>" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <button type="button" onclick="changeShopDetails()" class="btn btn-primary">Edit
+                                    details</button>
+                            </div>
+
+
+                        </form>
                     </div>
                 </div>
             </div>
@@ -69,6 +71,7 @@
         <div class="col-3"></div>
 
     </div>
+
 
     <?php
 

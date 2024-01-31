@@ -90,3 +90,10 @@ function getShopData(){
     }
     
 }
+
+function shopPicture(){
+    $seller_id = $_SESSION['auth_seller']['seller_id'];
+    $shop = new GetSellersDetailsController;
+    $result = $shop -> getShopImg($seller_id);
+    return $result;
+}
